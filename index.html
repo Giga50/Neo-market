@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neo Market — Магазин Приложений</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background: #0b0f19; color: #f3f4f6; }
+        header { text-align: center; margin-bottom: 40px; margin-top: 10px; }
+        h1 { font-size: 36px; margin: 0 0 8px 0; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #00f2fe; text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
+        .subtitle { font-size: 14px; color: #9ca3af; margin: 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; max-width: 1000px; margin: auto; }
+        .card { background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, border-color 0.2s; }
+        .card:active { transform: scale(0.98); }
+        .app-title { font-size: 20px; font-weight: bold; color: #ffffff; margin-bottom: 6px; }
+        .app-tag { display: inline-block; font-size: 11px; background: rgba(0, 242, 254, 0.1); color: #00f2fe; padding: 3px 8px; border-radius: 4px; margin-bottom: 12px; font-weight: 600; text-transform: uppercase; }
+        .app-desc { font-size: 14px; color: #9ca3af; margin-bottom: 20px; line-height: 1.5; flex-grow: 1; }
+        .btn { display: block; text-align: center; padding: 12px; background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%); color: #0b0f19; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px; transition: opacity 0.2s; box-shadow: 0 4px 12px rgba(0, 242, 254, 0.2); }
+        .btn:active { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Neo Market</h1>
+    <p class="subtitle">Магазин приложенийна windows mobile</p>
+</header>
+
+<div class="grid">
+    <!-- Карточка 1: Ваш Чат -->
+    <div class="card">
+        <div>
+            <div class="app-title">Unogram</div>
+            <span class="app-tag">Социальные сеть</span>
+            <div class="app-desc">UWP клиент telegram с функцией авто прокси</div>
+        </div>
+        <!-- Замените решетку # на ссылку вашего чата на GitHub Pages -->
+        <a href="https://4pda.to/forum/index.php?showtopic=1119286&view=findpost&p=142367634" class="btn" target="_blank">Скачать</a>
+    </div>
+
+    <!-- Карточка 2: Пример другого приложения -->
+    <div class="card">
+        <div>
+            <div class="app-title">NetSocial</div>
+            <span class="app-tag">веб мессенджер </span>
+            <div class="app-desc">Мессенджер для Windows mobile и не только</div>
+        </div>
+        <!-- Замените решетку # на ссылку для скачивания файла (apk, zip и т.д.) -->
+        <a href="https://4pda.to/forum/index.php?showtopic=1124966" class="btn" target="_blank">зайти</a>
+    </div>
+
+    <!-- Карточка 3: Ваше новое приложение -->
+    <div class="card">
+        <div>
+            <div class="app-title">google drive </div>
+            <span class="app-tag">Доступно</span>
+            <div class="app-desc">google диск </div>
+        </div>
+        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
+        <a href="https://4pda.to/forum/index.php?showtopic=1124804" class="btn" target="_blank">Скачать</a>
+    </div>
+
+    <!-- Карточка 4: Ваше новое приложение -->
+    <div class="card">
+        <div>
+            <div class="app-title">Windows Phone Internals</div>
+            <span class="app-tag">мульти-программа </div>
+        </div>
+        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
+        <a href="https://4pda.to/forum/index.php?showtopic=1125032" class="btn" target="_blank">Скачать</a>
+    </div>
+
+
+</body>
+</html>
