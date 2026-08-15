@@ -4,185 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neo Market — Магазин Приложений</title>
-<style>
-    * { box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background: #0b0f19; color: #f3f4f6; }
-    header { text-align: center; margin-bottom: 30px; margin-top: 10px; }
-    h1 { font-size: 36px; margin: 0 0 8px 0; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #00f2fe; text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
-    .subtitle { font-size: 14px; color: #9ca3af; margin: 0; }
-    
-    /* Сетка для квадратных плиток */
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; max-width: 1000px; margin: auto; }
-    
-    /* Карточка превращена в плоскую квадратную плитку */
-    .card { background: #1e293b; padding: 15px; height: 140px; border: 1px solid #334155; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; position: relative; transition: transform 0.1s; }
-    
-    /* Эффект жесткого нажатия плитки */
-    .card:active { transform: scale(0.95); background: #26354a; }
-    
-    /* Название приложения внутри плитки */
-    .app-title { font-size: 16px; font-weight: bold; color: #ffffff; margin: 0; word-break: break-word; }
-    
-    /* Маленький тег категории в углу плитки */
-    .app-tag { font-size: 10px; color: #00f2fe; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
-    
-    /* Описание скрыто, чтобы карточка оставалась компактной плиткой */
-    .app-desc { display: none; }
-    
-    /* Кнопка теперь растянута на всю плитку, текст "Скачать" аккуратно внизу */
-    .btn { display: block; font-size: 12px; font-weight: bold; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; margin-top: auto; }
-</style>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 20px; background: #0b0f19; color: #f3f4f6; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        /* Шапка с кроликом-маскотом */
+        header { max-width: 1000px; margin: 10px auto 30px auto; width: 100%; display: flex; align-items: center; justify-content: center; gap: 20px; background: #1e293b; padding: 15px 20px; border-radius: 12px; border: 1px solid #334155; }
+        .mascot-box { width: 85px; height: 110px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .mascot-img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.3)); }
+        .header-text { text-align: left; flex-grow: 1; }
+        h1 { font-size: 32px; margin: 0 0 4px 0; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #00f2fe; text-shadow: 0 0 10px rgba(0, 242, 254, 0.5); }
+        .subtitle { font-size: 13px; color: #9ca3af; margin: 0; }
+        
+        /* Сетка в стиле стартового экрана Windows Phone */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; max-width: 1000px; margin: 0 auto; width: 100%; flex-grow: 1; }
+        
+        /* Базовая плитка */
+        .card { background: #1e293b; padding: 15px; height: 140px; border: 1px solid #334155; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; position: relative; transition: transform 0.1s; }
+        .card:active { transform: scale(0.95); background: #26354a; }
+        
+        /* Названия и теги внутри плиток */
+        .app-title { font-size: 16px; font-weight: bold; color: #ffffff; margin: 0; word-break: break-word; }
+        .app-tag { font-size: 10px; color: #00f2fe; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .app-desc { display: none; } /* Описание скрыто для плиточного режима */
+        
+        /* Кнопка внизу плитки */
+        .btn { display: block; font-size: 12px; font-weight: bold; color: #9ca3af; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; margin-top: auto; }
+
+        /* Подвал */
+        footer { text-align: center; margin-top: 40px; padding: 20px 0; border-top: 1px solid #1e293b; font-size: 14px; color: #ffffff; line-height: 1.6; font-weight: 600; }
+        footer b { color: #00f2fe; }
+    </style>
 </head>
 <body>
 
-<header style="max-width: 1000px; margin: 10px auto 30px auto; width: 100%; display: flex; align-items: center; justify-content: center; gap: 20px; background: #1e293b; padding: 15px 20px; border-radius: 12px; border: 1px solid #334155;">
-    <!-- Контейнер для кролика-маскота -->
-    <div style="width: 85px; height: 110px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-        <img src="mascot.png" onerror="this.src='https://icons8.com'" style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 6px rgba(0, 242, 254, 0.3));" alt="Mascot">
-    </div>
-    <div style="text-align: left; flex-grow: 1;">
-        <h1 style="font-size: 32px; margin: 0 0 4px 0; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: #00f2fe; text-shadow: 0 0 10px rgba(0, 242, 254, 0.5);">Neo Market</h1>
-        <p style="font-size: 13px; color: #9ca3af; margin: 0;"></p>
-    </div>
-</header>
-    
 <header>
-    <h1>Neo Market</h1>
-    <p class="subtitle">Магазин приложений на windows mobile</p>
+    <div class="mascot-box">
+        <img src="mascot.png" onerror="this.src='https://icons8.com'" class="mascot-img" alt="Mascot">
+    </div>
+    <div class="header-text">
+        <h1>Neo Market</h1>
+        <p class="subtitle">Магазин приложений для Windows Mobile</p>
+    </div>
 </header>
 
 <div class="grid">
-    <!-- Карточка 1: Ваш Чат -->
-    <div class="card">
-        <div>
-            <div class="app-title">Unogram</div>
-            <span class="app-tag">Социальные сеть</span>
-            <div class="app-desc">UWP клиент telegram с функцией авто прокси</div>
-        </div>
-        <!-- Замените решетку # на ссылку вашего чата на GitHub Pages -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1119286&view=findpost&p=142367634" class="btn" target="_blank">Скачать</a>
-    </div>
 
-    <!-- Карточка 2: Пример другого приложения -->
-    <div class="card">
-        <div>
-            <div class="app-title">NetSocial</div>
-            <span class="app-tag">веб мессенджер </span>
-            <div class="app-desc">Мессенджер для Windows mobile и не только</div>
-        </div>
-        <!-- Замените решетку # на ссылку для скачивания файла (apk, zip и т.д.) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1124966" class="btn" target="_blank">зайти</a>
-    </div>
-
-    <!-- Карточка 3: Ваше новое приложение -->
-    <div class="card">
-        <div>
-            <div class="app-title">google drive </div>
-            <span class="app-tag">Доступно</span>
-            <div class="app-desc">google диск </div>
-        </div>
-        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1124804" class="btn" target="_blank">Скачать</a>
-    </div>
-
-    <!-- Карточка 4: Ваше новое приложение -->
-    <div class="card">
-        <div>
-            <div class="app-title">Windows Phone Internals</div>
-            <span class="app-tag">мульти-программа </span>
-            <div class="app-desc">мульти-программа </div>
-        </div>
-        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1125032" class="btn" target="_blank">Скачать</a>
-
-</div>
-    <!-- Карточка 5: Ваше новое приложение -->
-    <div class="card">
-        <div>
-            <div class="app-title">Live Store</div>
-            <span class="app-tag">Магазин приложений</span>
-            <div class="app-desc">Магазин приложений на windows windows 10</div>
-        </div>
-        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1124956" class="btn" target="_blank">Скачать</a>
-
-    </div>
-    <!-- Карточка 6: Ваше новое приложение -->
-    <div class="card">
-        <div>
-            <div class="app-title">YTMusicWP</div>
-            <span class="app-tag">ютуб музыка на windows mobile 8.1</span>
-            <div class="app-desc"> ютуб музыка</div>
-        </div>
-        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1120690" class="btn" target="_blank">Скачать</a>
-
-    </div>
-    <!-- Карточка 4: Ваше новое приложение -->
-    <div class="card">
-        <div>
-            <div class="app-title">NSS Pro</div>
-            <span class="app-tag">неофициальная программа для "прошивки" телефонов Nokia Lumia</span>
-            <div class="app-desc">неофициальная программа для "прошивки" телефонов Nokia Lumia </div>
-        </div>
-        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1124899" class="btn" target="_blank">Скачать</a>
-
-    </a>
-    </div> 
-    <!-- Карточка 4: Ваше новое приложение -->
-    <div class="card">
-        <div>
-            <div class="app-title">MetroStore UWP</div>
-            <span class="app-tag">альтернативный магазин приложений для Windows 10 Mobile</span>
-            <div class="app-desc">альтернативный магазин приложений для Windows 10 Mobile</div>
-        </div>
-        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1120746" class="btn" target="_blank">Скачать</a>
-            
-    </div>
-    <!-- Карточка 4: Ваше новое приложение -->
-    <div class="card">
-        <div>
-            <div class="app-title">WinArchive</div>
-            <span class="app-tag">Магазин приложений</span>
-            <div class="app-desc">Магазин приложений</div>
-        </div>
-        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1106744" class="btn" target="_blank">Скачать</a>
+    <!-- 1. Google Drive -->
+    <a href="https://4pda.to" class="card" target="_blank">
+        <span class="app-tag">Доступно</span>
+        <div class="app-title">Google Drive</div>
+        <div class="btn">Скачать</div>
     </a>
 
-        
-    </div>
-    <!-- Карточка 4: Ваше новое приложение -->
-    <div class="card">
-        <div>
-            <div class="app-title">Telegram UWP</div>
-            <span class="app-tag">Клиент Telegram с полноценным TDLib под Windows 10 Mobile 1511</span>
-            <div class="app-desc">Клиент Telegram с полноценным TDLib под Windows 10 Mobile 1511</div>
-        </div>
-        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1123575" class="btn" target="_blank">Скачать</a>
-             </a>
-    
-    <div>
-    <!-- Карточка 4: Ваше новое приложение -->
-    <div class="card">
-        <div>
-            <div class="app-title">Youtube UWP</div>
-            <span class="app-tag">Клиент YouTube для Windows 10 mobile</span>
-            <div class="app-desc">Клиент YouTube для Windows 10 mobile</div>
-        </div>
-        <!-- Замените решетку # на реальную ссылку (например, на файл или другой ваш сайт) -->
-        <a href="https://4pda.to/forum/index.php?showtopic=1105191" class="btn" target="_blank">Скачать</a>
-            </a>
+    <!-- 2. Windows Phone Internals -->
+    <a href="https://4pda.to" class="card" target="_blank">
+        <span class="app-tag">Мульти-программа</span>
+        <div class="app-title">Windows Phone Internals</div>
+        <div class="btn">Скачать</div>
+    </a>
 
-    </div>
-        
-    </food>
+    <!-- 3. Live Store -->
+    <a href="https://4pda.to" class="card" target="_blank">
+        <span class="app-tag">Магазин приложений</span>
+        <div class="app-title">Live Store</div>
+        <div class="btn">Скачать</div>
+    </a>
+
+    <!-- 4. YTMusicWP -->
+    <a href="https://4pda.to" class="card" target="_blank">
+        <span class="app-tag">Ютуб музыка на WM 8.1</span>
+        <div class="app-title">YTMusicWP</div>
+        <div class="btn">Скачать</div>
+    </a>
+
+    <!-- 5. NSS Pro -->
+    <a href="https://4pda.to" class="card" target="_blank">
+        <span class="app-tag">Неофициальная</span>
+        <div class="app-title">NSS Pro</div>
+        <div class="btn">Скачать</div>
+    </a>
+
+    <!-- 6. MetroStore UWP -->
+    <a href="https://4pda.to/forum/index.php?showtopic=1120746" class="card" target="_blank">
+        <span class="app-tag">Альтернативный</span>
+        <div class="app-title">MetroStore UWP</div>
+        <div class="btn">Скачать</div>
+    </a>
+
+    <!-- 7. WinArchive -->
+    <a href="https://4pda.to/forum/index.php?showtopic=1106744альтернативный магазин приложений для Windows 10 Mobile" class="card" target="_blank">
+        <span class="app-tag">Магазин приложений</span>
+        <div class="app-title">WinArchive</div>
+        <div class="btn">Скачать</div>
+    </a>
+
+    <!-- 8. Telegram UWP -->
+    <a href="https://4pda.to/forum/index.php?showtopic=1123575" class="card" target="_blank">
+        <span class="app-tag"></span>
+        <div class="app-title">Telegram UWP</div>
+        <div class="btn">Скачать</div>
+    </a>
+
+    <!-- 9. Youtube UWP (Теперь стоит ровно!) -->
+    <a href="https://4pda.to/forum/index.php?showtopic=1105191" class="card" target="_blank">
+        <span class="app-tag"></span>
+        <div class="app-title">Youtube UWP</div>
+        <div class="btn">Скачать</div>
+    </a>
+
+</div> <!-- КОНЕЦ СЕТКИ -->
+
+<footer>
     <div>Создано: <b>Aero Hatsune Miku</b></div>
-    <div>Все данные защищены </div>
+    <div>Все данные защищены</div>
 </footer>
 
 </body>
 </html>
+
